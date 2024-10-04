@@ -1,3 +1,7 @@
+/*
+	программа была написана для изучения макросов
+*/
+
 #include <stdio.h>
 #define SQR(x) x * x
 int main()
