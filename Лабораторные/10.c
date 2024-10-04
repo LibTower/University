@@ -1,13 +1,22 @@
+/* 
+	код получает на вход масив из N чисел, 
+ 	сортирует его по убыванию, перезаписывает массив в виде матрицы n*n элементов,
+  	после чего находит нижние 4 элемента масива и находит их сумму.
+   	Так же программа пишет, есть ли за пределами этой четверти нули или нет.
+
+    	Работа выполнялась для изучения синтаксиса функций на C.
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 const int n = 4;
 const int N = n*n;
 
-void my_print(int ArrayLen, int arr[][n])
+void my_print(int ArrayLen, int arr[][n]) // выводит матрицу n*n элементов на экран
 {
 	int summ = 0;
-	int b = 0;
+	bool b = false;
 	printf("Ваш массив:\n");
 	for(int j = 0; j<ArrayLen; j++)
 	{
@@ -16,21 +25,21 @@ void my_print(int ArrayLen, int arr[][n])
 			printf("%d ", arr[j][i]);
 			if(i>=ArrayLen-2 && j>=ArrayLen-2)
 			{
-				summ += arr[j][i];
+				summ += arr[j][i];  // сумма нижних четырех элементов масива
 			}
 			else
 			{
-				if(arr[j][i] == 0){b = 1;}
+				if(arr[j][i] == 0){b = true;} //если находит эллемент масива равный 0, меняет значение переменной на true.
 			}
 		}
 		printf("\n");
 	}
 	printf("Сумма элементов нижней правой четверти: %d\n", summ);
-	if(b == 1) {printf("За пределами четверти нули есть\n");}
+	if(b == true) {printf("За пределами четверти нули есть\n");}
 	else{printf("За пределами четверти нулей нет\n");}
 }
 
-void CreateRandom(int ArrayLen, int arr[])
+void CreateRandom(int ArrayLen, int arr[]) // заполняет масив рандомными значениями
 {
 	srand(time(NULL));
 	for (int i = 0; i < ArrayLen; i++)
@@ -39,7 +48,7 @@ void CreateRandom(int ArrayLen, int arr[])
 	}
 }
 
-void CreatePrint(int ArrayLen, int arr[])
+void CreatePrint(int ArrayLen, int arr[]) //заполняет значениями с клавиатуры
 {
 	int element;
 	printf("Введите эллементы массива:\n");
@@ -51,11 +60,12 @@ void CreatePrint(int ArrayLen, int arr[])
 	}
 }
 
-int sort(const void *a, const void *b)
+int sort(const void *a, const void *b) //сортирует массив
 {
 	return -(*(int*)a - *(int*)b);
 }
-void matrix(int arr[], int arr2d[][n], int ArrayLen)
+
+void matrix(int arr[], int arr2d[][n], int ArrayLen) //перезаписывает массив в матрицу
 {
 	int count = 0;
 	for(int j = 0; j<ArrayLen; j++)
